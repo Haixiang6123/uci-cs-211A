@@ -21,7 +21,7 @@ Aprime = A - meanIntensity;
 Aprime(Aprime < 0) = 0;
 
 %% e
-y = x(1:8);
+y = [1:8];
 newY = reshape(y,[4,2]);
 
 %% f
@@ -53,12 +53,14 @@ title("Filter size [13,13], sigma 10");
 
 %% h
 % No changes, they are same
+conImage1 = conv2(A, filter1, 'same');
+
 figure("Name", "Conv vs imfilter");
 
 subplot(121)
 imshow(image1,[])
-title("Using imfilter");
+title("Imfilter");
 
 subplot(122)
 imshow(conImage1,[])
-title("Using conv2");
+title("conv2");
