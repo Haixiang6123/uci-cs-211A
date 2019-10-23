@@ -1,3 +1,5 @@
+%% Part 3: Multi-Scale Edge Detection
+
 images = ["../images/CARTOON.jpg", "../images/flowergray.jpg", "../images/kitty.jpg", ...
     "../images/polarcities.jpg", "../images/text.jpg" ];
 

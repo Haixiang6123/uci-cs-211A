@@ -1,3 +1,4 @@
+%% Part 2: Laplacian Pyramid
 images = ["../images/CARTOON.jpg", "../images/flowergray.jpg", "../images/kitty.jpg", ...
     "../images/polarcities.jpg", "../images/text.jpg" ];
 
