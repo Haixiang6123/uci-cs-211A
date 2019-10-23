@@ -32,9 +32,9 @@ downImage = A(indexs,indexs);
 
 filter1 = fspecial('gaussian',[3,3], 1);
 image1 =  imfilter(A, filter1);
-filter2 = fspecial('gaussian',[3,4], 10);
+filter2 = fspecial('gaussian',[5,5], 10);
 image2 =  imfilter(A, filter2);
-filter3 = fspecial('gaussian',[4,3], 10);
+filter3 = fspecial('gaussian',[13,13], 10);
 image3 =  imfilter(A, filter3);
 
 figure("Name", "Gaussian filter");
@@ -45,11 +45,11 @@ title("Filter size [3,3], sigma 1");
 
 subplot(132)
 imshow(image2,[])
-title("Filter size [3,4], sigma 5");
+title("Filter size [5,5], sigma 5");
 
 subplot(133)
 imshow(image3,[])
-title("Filter size [4,3], sigma 10");
+title("Filter size [13,13], sigma 10");
 
 %% h
 % No changes, they are same
