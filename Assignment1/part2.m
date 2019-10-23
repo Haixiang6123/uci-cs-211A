@@ -2,7 +2,7 @@ images = ["../images/CARTOON.jpg", "../images/flowergray.jpg", "../images/kitty.
     "../images/polarcities.jpg", "../images/text.jpg" ];
 
 filter = [0.25,0.25; 0.25,0.25];
-%%
+
 for image = images
     
     img = imread(image);
