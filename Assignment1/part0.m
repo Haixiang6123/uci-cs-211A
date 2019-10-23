@@ -31,10 +31,14 @@ meanIntensity = mean(mean(A));
 Aprime = A - meanIntensity;
 Aprime(Aprime < 0) = 0;
 
+<<<<<<< HEAD
 %% 
 % *e. Let y be the vector: y = [1: 8]. Use the reshape command to form a new 
 % matrix s whose first column is [1, 2, 3, 4]?, and whose second column is 
 % [5, 6, 7, 8]?.*
+=======
+%% e
+>>>>>>> e40b8eeb79a63296bd92f6dc463038f2ad5b4806
 y = [1:8];
 newY = reshape(y,[4,2]);
 
@@ -71,9 +75,14 @@ subplot(133)
 imshow(image3,[])
 title("Filter size [13,13], sigma 10");
 
+<<<<<<< HEAD
 %% 
 % *h. Apply the conv2 instead of imfilter function to the same process 
 % (for one Gaussian Filter), do you see any changes? Why?*
+=======
+%% h
+% No changes, they are same
+>>>>>>> e40b8eeb79a63296bd92f6dc463038f2ad5b4806
 conImage1 = conv2(A, filter1, 'same');
 
 figure("Name", "Conv vs imfilter");
@@ -84,5 +93,9 @@ title("Imfilter");
 
 subplot(122)
 imshow(conImage1,[])
+<<<<<<< HEAD
 title("conv2");
 % *No changes, they are same*
+=======
+title("conv2");
+>>>>>>> e40b8eeb79a63296bd92f6dc463038f2ad5b4806
