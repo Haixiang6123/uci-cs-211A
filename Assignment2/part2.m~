@@ -1,0 +1,105 @@
+%% first image
+image = (imread("./images/moonlanding.png"));
+image = im2double(image);
+
+% Apply notch filter
+filteredImg = notchFilter(image, [0.5, 1]);
+
+figure;
+imshow(image);
+title('Origin');
+
+figure;
+imshow(filteredImg, []);
+title('Noise removed');
+
+%% second image
+
+image = rgb2gray(imread("./images/psnr2.png"));
+image = im2double(image);
+
+% Apply notch filter
+filteredImg = notchFilter(image,[0.75, 1]);
+
+figure;
+imshow(image);
+title('Origin');
+
+figure;
+imshow(filteredImg, []);
+title('Noise removed');
+
+function res = notchFilter(img, range)
+    croppedSize = 5;
+    
+    % Calcualte DFT
+    fftImg = fftshift(fft2(img));
+    amp = abs(fftImg);
+    
+    minM = min(amp(:));
+    s = sort(amp(:));
+    maxM = s(end - 20);
+    
+    % Calculate lower bound and upperbound
+    lowerbound = (maxM - minM) * range(1) + minM;
+    upperbound = (max(amp(:)) - minM) * range(2) + minM;
+    
+    % Find all noise
+    band = (amp >= lowerbound) & (amp < upperbound);
+    
+    
+    localMin = ordfilt2(amp, 9 , ones(3, 3));
+    peak = (amp == localMin) & band;
+    [w, h] = size(img);
+    [r, c] = find(peak);
+    
+    noise = zeros(size(fftImg));
+    for i = 1:length(r)
+        if (w-r(i))^2+(h-c(i))^2 > croppedSize^2
+            if r(i) > croppedSize && c(i) > croppedSize
+                if r(i) + croppedSize > w
+                    rend = w;
+                else
+                    rend = r(i) + croppedSize;
+                end
+                
+                if c(i) + croppedSize > h
+                    cend = h;
+                else
+                    cend = c(i) + croppedSize;
+                end
+                noise(r(i) - croppedSize:rend, c(i) - croppedSize:cend) = 1;
+             
+            end
+        end
+    end
+    
+    % make sure center part is not removed
+    cx = round((size(noise, 2) + 1) / 2);
+    cy = round((size(noise, 1) + 1) / 2);
+    noise(cy - 2*croppedSize:cy + 2*croppedSize, cx - croppedSize:cx + 2*croppedSize) = 0;
+    fftImg(noise > 0) = 0;
+
+    figure;
+    subplot(121)
+    imshow(log(amp),[]);
+    title("Origin");
+    subplot(122)
+    imshow(real(log(abs(fftImg))), []);
+    title('Noise removed');
+
+    res = real(ifft2(fftshift(fftImg)));
+end
+
+function lowerbound = getLowerBound()
+    lowerbound = 
+end
+
+function band = getBand(amp, minM, maxM)
+    % Calculate lower bound and upperbound
+    lowerbound = (maxM - minM) * range(1) + minM;
+    upperbound = (max(amp(:)) - minM) * range(2) + minM;
+    
+    % find the noise part in frequency domain,
+    band = (amp >= lowerbound) & (amp < upperbound);
+end
