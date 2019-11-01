@@ -1,4 +1,5 @@
-%% Image: moonlanding
+%% Part 2: Notch Filter
+% Image: moonlanding
 image = (imread("./images/moonlanding.png"));
 image = im2double(image);
 
@@ -13,7 +14,7 @@ figure;
 imshow(filteredImg, []);
 title('Noise removed');
 
-%% Image: psnr2
+% Image: psnr2
 
 image = rgb2gray(imread("./images/psnr2.png"));
 image = im2double(image);
