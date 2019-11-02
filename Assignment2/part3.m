@@ -53,3 +53,6 @@ imshow(image512);
 
 subplot(122)
 imshow(log(abs(fftshift(fft2(image512)))), []);
+
+% Explain:
+% Explain:
