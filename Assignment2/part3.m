@@ -55,4 +55,5 @@ subplot(122)
 imshow(log(abs(fftshift(fft2(image512)))), []);
 
 % Explain:
-% Explain:
+% Padding in spatial domain increase sampling rate in frequency domain, 
+% which makes the dft image resolution higher.
